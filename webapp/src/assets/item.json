@@ -1,0 +1,12 @@
+[
+    {"id":1,"name":"SandWich","price":100,"dateOfLaunch":"2017-12-03","active":true,"category":"Starter","freeDelivery":false ,"image":"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
+    {"id":2,"name":"Burger","price":150,"dateOfLaunch":"2017-12-03","active":true,"category":"Starter","freeDelivery":true ,"image":"https://images.unsplash.com/photo-1547584370-2cc98b8b8dc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
+    {"id":3,"name":"Pizza","price":120,"dateOfLaunch":"2017-12-03","active":false,"category":"Main Course","freeDelivery":false,"image":"https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" },
+    {"id":4,"name":"French-fries","price":111,"dateOfLaunch":"2017-12-03","active":false,"category":"Starter","freeDelivery":true,"image":"https://images.unsplash.com/photo-1529259266118-cf22737f713f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"},
+    {"id":5,"name":"Cholate-browine","price":125,"dateOfLaunch":"2017-12-03","active":true,"category":"Starter","freeDelivery":false ,"image":"https://images.unsplash.com/photo-1546393009-ef37dc6dfd35?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"}
+
+
+
+
+
+ ]

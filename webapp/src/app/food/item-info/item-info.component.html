@@ -1,0 +1,82 @@
+<div class="card mb-2">
+    <img [src]="Food.image"
+        alt="" class="card-img-top">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-8">
+                <span class="text-muted float-left">
+                    <h4>{{Food.name}}</h4>
+                </span>
+            </div>
+            <div class="col-4">
+                <span class="text-muted float-right">
+                    <h4>₹ {{Food.price}}</h4>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <span class="badge badge-success float-left" *ngIf="Food.active">Active</span>
+                <span class="text-muted float-left">{{Food.category}}</span>
+            </div>
+            <div class="col-4">
+
+                <span class="badge badge-primary float-right" *ngIf="Food.freeDelivery">FREE</span>
+                <i class="material-icons float-right" *ngIf="Food.freeDelivery">
+                    local_shipping
+                </i>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="row clock">
+                    <small><span class="text-muted ml-2"><i class="material-icons  ico ml-auto">
+                                schedule
+                            </i>Launch </span></small>
+
+
+                </div>
+                <div class="row">
+                    <span class="text-meuted ml-2">{{Food.dateOfLaunch | date}}</span>
+
+                </div>
+
+            </div>
+            <div class="row">
+                    <div class="col-12 mt-2" *ngIf="foodAdded">
+                        <div class="alert alert-success alert-dissmissible fade show alert-msg">
+                            item added to cart sucessfully
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+
+                            </button>
+                        </div>
+
+                    </div>
+
+
+            </div>
+            <div *ngIf="isEditAllowed()">
+
+
+                <div class="col text-right">
+                    <button class=" btn btn-danger" [routerLink]="['/productEdit',Food.id]"><i class="material-icons">
+                            edit
+                        </i>Edit</button>
+                </div>
+            </div>
+            <div *ngIf="!isEditAllowed()">
+
+
+                    <div class="col text-right">
+                        <button class=" btn btn-danger" (click)=" onAddToCart(Food.id)" ><i class="material-icons">
+                                shopping_cart 
+                            </i>Add to Cart</button>
+                    </div>
+                    <ng-template #logg>
+                        <a routerLink="login"></a>
+                    </ng-template>
+                </div>
+        </div>
+    </div>

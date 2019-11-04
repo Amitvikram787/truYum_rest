@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a routerLink="" class=" navbar-brand">
+          <i class="material-icons">
+                  local_dining
+                  </i>
+           truYum
+  </a>
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#content">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="content">
+      <ul class="navbar-nav ml-auto">
+          
+          <li class="nav-item">
+              <a  routerLink="" routerLinkActive="active" class="nav-link"> Menu Item</a>
+            </li>
+          <li class="nav-item" *ngIf="!isAuthenticated()"><a routerLink="signup" routerLinkActive="active" class="nav-link"> Signup</a></li>
+          <li class="nav-item" *ngIf="isAuthenticated() && !isAdmin() "><a routerLink="cart" routerLinkActive="active" class="nav-link"> Cart</a></li>
+          <li class="nav-item" *ngIf="!isAuthenticated()"><a routerLink="login" routerLinkActive="active" class="nav-link"> Log In</a></li>
+          <li class="nav-item" *ngIf="isAuthenticated()"><a class="nav-link"><i class="material-icons">
+            perm_identity
+            </i> {{getUser().lastname}},{{getUser().firstname}}</a></li>
+          <li class="nav-item" *ngIf="isAuthenticated()"><a routerLink=" " routerLinkActive="active" class="nav-link" (click)="onSignOut()"> Log Out</a></li>
+      </ul>
+
+  </div>
+</nav>
