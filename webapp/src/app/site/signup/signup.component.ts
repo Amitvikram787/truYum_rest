@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,13 +12,16 @@ export class SignupComponent implements OnInit {
 
    signup:FormGroup;
    formss:boolean;
-  constructor() { }
+   error:string;
+   passwordError:string;
+
+  constructor(private userService:UserService, private router:Router) { }
 
   ngOnInit() {
     this.signup=new FormGroup({
-      'name' :new FormControl(null,[Validators.required,Validators.maxLength(20)],this.isuser),
-       'fname':new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$'),Validators.maxLength(50)]),
-       'lname':new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$'),Validators.maxLength(50)]),
+        'username' :new FormControl(null,[Validators.required,Validators.maxLength(20)],this.isuser),
+       'firstName':new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$'),Validators.maxLength(50)]),
+       'lastName':new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z]+$'),Validators.maxLength(50)]),
        'password': new FormControl(null,Validators.required),
        'cpassword': new FormControl(null,[Validators.required,this.mcp.bind(this)] )
 
@@ -26,18 +31,18 @@ export class SignupComponent implements OnInit {
     
     
   }
-  get name()
+  get username()
     {
-      return this.signup.get('name');
+      return this.signup.get('username');
     }
 
-  get fname()
+  get firstName()
   {
-    return this.signup.get('fname');
+    return this.signup.get('firstName');
   }
-  get lname()
+  get lastName()
   {
-    return this.signup.get('lname');
+    return this.signup.get('lastName');
 
   }
   get password()
@@ -84,8 +89,30 @@ export class SignupComponent implements OnInit {
   }
   onSubmit()
   {
-    this.formss=true;
-    this.signup.reset();
+    // this.formss=true;
+    // this.signup.reset();
+  let user1=this.signup.value.password;
+  let user2=this.signup.value.cpassword;
+  if(user1===user2)
+  {
+    this.userService.addUser(this.signup.value).subscribe(data=>
+      {
+        this.router.navigate(['/login']);
+      }, error =>
+      {
+        this.error=error.error.message;
+        console.log(this.error);
+        
+      }
+      
+      );
+
+  }
+  else{
+    this.passwordError="Password and confirm password is not match";
+  }
+
+
   }
   
 }

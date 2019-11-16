@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserAuthService } from 'src/app/services/user-auth.service';
+import { CartService } from 'src/app/shoping/cart/cart.service';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,32 +14,66 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-   isLoginValid:boolean=true;
+   error:string;
+   //isLoginValid:boolean=true;
    authSource:boolean=false;
-  constructor(private authService:AuthService,
+  constructor(
     private route:ActivatedRoute,
-    private router:Router) { 
+    private router:Router,private authenticationService:AuthenticationService, private userAuthService:UserAuthService, private cartService:CartService,private authService:AuthService) { 
       this.authSource=route.snapshot.queryParams['notLogged'];
     }
 
   ngOnInit() {
+    if( this. userAuthService.getMenuId()!=-1)
+    {
+     // this.isLoginValid=true;
+    }
+      else
+      {
+       // this.isLoginValid=false;
+      }
+
+
+
   }
   onSubmit(form:NgForm)
   {
-    const username=form.value.uname;
-    const password=form.value.pwd;
-    if(username==='John')
-    {
-      this.isLoginValid=false;
+     this.authService.logIn(form.value.uname,form.value.pwd);
+    //  this.authenticationService.authenticate(form.value.username,form.value.password).subscribe(data=>{
 
-    }
-    else
-    {
-      this.authService.logIn(username,password);
-      this.router.navigate([this.authService.redirectUrl]);
+    //   this.userAuthService.loggedIn=true;
+    //   console.log(data.token);
+    //   this.userAuthService.setToken(data.token);
+    //   this.userAuthService.setRole(data.role);
+    //   this.userAuthService.setUser(form.value.username);
+    //   if(this.userAuthService.getuser()!="admin" && this.userAuthService.getMenuId()!=-1)
+    //   {
+    //    // this.cartService.addToCart(this.userAuthService.getuser(),this.userAuthService.getMenuId()).subscribe(data =>
+    //       // {
+    //       //   console.log("Added");
+    //       // });
+        
+    //   }
+    //   this.router.navigate(['menu']);
      
+    //   },
+    //   (error)=>
+    //   {
+    //     console.log(error.message);
+    //     if(error.status==404)
+    //     {
+    //       this.error="Invalid username/password"
+    //     }
+
+    //  })
+    
+     
+    }
+    isLoginValid()
+    {
+      return this.authService.isloginValid;
     }
   
   }
 
-}
+

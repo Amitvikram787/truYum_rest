@@ -7,7 +7,7 @@
            </div>
            <div class="card-body">
               <form  (ngSubmit)="onSubmit(f)" #f="ngForm">
-                  <div class="alert alert-danger" *ngIf="!isLoginValid">
+                  <div class="alert alert-danger" *ngIf="!isLoginValid()">
                       Invalid Username /Password
 
                   </div>

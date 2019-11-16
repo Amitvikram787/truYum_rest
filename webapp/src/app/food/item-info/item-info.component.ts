@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FoodItem } from '../food-item.model';
 import { AuthService } from 'src/app/site/auth.service';
+import { CartService } from 'src/app/shoping/cart/cart.service';
 
 @Component({
   selector: 'app-item-info',
@@ -14,7 +15,7 @@ export class ItemInfoComponent implements OnInit {
   @Input() Food:FoodItem;
   @Output() addedToCart:EventEmitter<number>=new EventEmitter<number>();
   foodAdded= false;
-  constructor( private authService:AuthService) { }
+  constructor( private authService:AuthService,private cartService:CartService) { }
 
   onAddToCart(foodid:number)
   {

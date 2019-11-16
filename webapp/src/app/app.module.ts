@@ -16,6 +16,9 @@ import { CartComponent } from './shoping/cart/cart.component';
 import { UserService } from './site/user.service';
 import { AuthService } from './site/auth.service';
 import { NotFoundComponent } from './site/not-found/not-found.component';
+import { UserAuthService } from './services/user-auth.service';
+import { MenuItemService } from './services/menu-item.service';
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,7 @@ import { NotFoundComponent } from './site/not-found/not-found.component';
     HttpClientModule
     
   ],
-  providers: [FoodService,UserService,AuthService],
+  providers: [FoodService,UserService,AuthService,UserAuthService,MenuItemService,AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

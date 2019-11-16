@@ -2,9 +2,10 @@ export interface User
 {
     username:string;
     password?:string;
-    firstname:string;
-    lastname:string;
-    role:string;
-    image:string;
+    firstName:string;
+    lastName:string;
+    role?:string;
+    image?:string;
+    accessToken?:string;
    
 }

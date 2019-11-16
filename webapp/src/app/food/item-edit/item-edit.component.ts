@@ -3,6 +3,7 @@ import { FoodService } from '../food.service';
 import {  Params, ActivatedRoute, Router } from '@angular/router';
 import { FoodItem } from '../food-item.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MenuItemService } from 'src/app/services/menu-item.service';
 
 @Component({
   selector: 'app-item-edit',
@@ -11,11 +12,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ItemEditComponent implements OnInit {
     editForm:FormGroup;
-  constructor(private foodService:FoodService, private router:Router, private route:ActivatedRoute) { }
+    error:string;
+    formEdited=false;
+  constructor(private foodService:FoodService, private router:Router, private route:ActivatedRoute,private menuItemService:MenuItemService) { }
   productEdited:boolean=false;
 
   ngOnInit() {
       this.editForm=new FormGroup({
+        'id':new FormControl(),
+        'imgSrc':new FormControl(),
         'name':new FormControl(null,[Validators.required,Validators.maxLength(200)]),
        'price':new FormControl(null,[Validators.required,Validators.pattern('^[0-9]+$')]),
         'dateOfLaunch':new FormControl(null, [Validators.required]),
@@ -29,15 +34,18 @@ export class ItemEditComponent implements OnInit {
           this.route.params.subscribe((params:Params)=>
             {
                 const prodId=params['id'];
-                 this.foodService.getItem(prodId).subscribe((product:FoodItem)=>
+                 this.menuItemService.getMenuItems(prodId).subscribe((product:FoodItem)=>
       
                 {
+                  product.dateOfLaunch=new Date(product.dateOfLaunch);
         if(product)
         {
          this.editForm.patchValue({
+          id:product.id,
+          imgSrc:product.imgSrc,
           name:product.name,
           price:product.price,
-          dateOfLaunch:product.dateOfLaunch,
+          dateOfLaunch:product.dateOfLaunch.toISOString().slice(0,10),
           active:product.active,
           category:product.category,
           freeDelivery:product.freeDelivery
@@ -61,7 +69,13 @@ export class ItemEditComponent implements OnInit {
 
 onSubmitEditForm()
  {
-   console.log(this.editForm);
-   this.productEdited=true;
+  // this.formEdited=true;
+  //  console.log(this.editForm);
+    this.productEdited=true;
+  console.log(this.editForm.value);
+  this.menuItemService.updateMenuItem(this.editForm.value).subscribe(data=>
+    {
+      console.log("subcribed");
+    });
  }
 }

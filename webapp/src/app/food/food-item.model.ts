@@ -7,4 +7,5 @@ export interface FoodItem
     active:boolean;
     category:string;
     freeDelivery:boolean;
+    imgSrc:String;
 }

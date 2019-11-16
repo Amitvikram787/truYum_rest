@@ -8,10 +8,13 @@ import { FoodItem } from "./food-item.model";
 @Injectable({providedIn:'root'})
 export class FoodService
 {
-    configUrl='assets/item.json'
+    configUrl='http://localhost:8060/menu-items'
     filter=new Subject();
     constructor(private http:HttpClient){}
     getItems():Observable<any>{
+      
+        
+
         return this.http.get(this.configUrl);
     }
     getItem(id:number):Observable<any>
